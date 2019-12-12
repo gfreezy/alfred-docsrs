@@ -1,2 +1,4 @@
 /target
 **/*.rs.bk
+/workflow/docsrs
+/Search Docs.rs.alfredworkflow
