@@ -1,0 +1,70 @@
+name: Build & Test
+
+on:
+  push:
+    branches:
+      - master
+  pull-request:
+    branches:
+      - master
+  release:
+    types: [published, created, edited]
+
+jobs:
+  build:
+    runs-on: [macos-latest, linux-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Rust, Clippy and Rustfmt
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: rustfmt, clippy
+      - name: Format
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+      - name: Clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+      - name: Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+      - name: Build Release
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+      - name: Upload Binary for Package Workflow
+        uses: actions/upload-artifact@v1
+        if: github.event_name == 'release'
+        with:
+          name: docsrs
+          path: target/release/docsrs
+
+  release:
+    needs: build
+    runs-on: macos-latest
+    if: github.event_name == 'release'
+
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: docsrs
+          path: workflow/docsrs
+      - name: Package Workflow
+        run: |
+          ./release.sh
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./SearchDocs.rs.alfredworkflow
+          asset_name: SearchDocs.rs-${{ github.ref }}.alfredworkflow

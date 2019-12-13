@@ -1,4 +1,8 @@
 #!/bin/bash -e
-cargo build --release
-cp target/release/docsrs workflow/
+if [ ! -f workflow/docsrs ]; then
+    cargo build --release
+    cp target/release/docsrs workflow/
+fi
+
 ./package.sh workflow .
+rm workflow/docsrs
