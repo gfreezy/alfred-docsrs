@@ -65,8 +65,7 @@ jobs:
           name: docsrs
           path: workflow/docsrs
       - name: Package Workflow
-        run: |
-          ./release.sh
+        run: ./release.sh
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
