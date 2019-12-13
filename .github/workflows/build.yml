@@ -63,9 +63,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: docsrs
-          path: workflow/docsrs
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
+      - run: cp docsrs/docsrs workflow/
       - name: Package Workflow
         run: ./release.sh
       - name: Create Release
