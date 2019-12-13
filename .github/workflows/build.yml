@@ -64,6 +64,8 @@ jobs:
         with:
           name: docsrs
           path: workflow/docsrs
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
       - name: Package Workflow
         run: ./release.sh
       - name: Create Release
