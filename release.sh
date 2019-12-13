@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ex
 
-if [ ! -f "$DIR/workflow/docsrs" ]; then
+if [ ! -f "workflow/docsrs" ]; then
     cargo build --release
     cp target/release/docsrs workflow/
 fi
