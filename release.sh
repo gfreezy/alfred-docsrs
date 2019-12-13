@@ -1,7 +1,8 @@
 #!/bin/bash -ex
-pwd
-ls -l
-ls -l workflow
+ls -l workflow/docsrs
+
+[ ! -f "workflow/docsrs" ] && echo not exist
+
 if [ ! -f "workflow/docsrs" ]; then
     cargo build --release
     cp target/release/docsrs workflow/
