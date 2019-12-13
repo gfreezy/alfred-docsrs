@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 ls -l workflow/docsrs
 
 [ ! -f "workflow/docsrs" ] && echo not exist
