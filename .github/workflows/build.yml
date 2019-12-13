@@ -16,34 +16,30 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-#      - name: Install Rust, Clippy and Rustfmt
-#        uses: actions-rs/toolchain@v1
-#        with:
-#          profile: minimal
-#          toolchain: stable
-#          components: rustfmt, clippy
-#      - name: Format
-#        uses: actions-rs/cargo@v1
-#        with:
-#          command: fmt
-#          args: --all -- --check
-#      - name: Clippy
-#        uses: actions-rs/cargo@v1
-#        with:
-#          command: clippy
-#      - name: Test
-#        uses: actions-rs/cargo@v1
-#        with:
-#          command: test
-#      - name: Build Release
-#        uses: actions-rs/cargo@v1
-#        with:
-#          command: build
-#          args: --release
-      - name: Junk
-        run: |
-          mkdir -p target/release
-          touch target/release/docsrs
+      - name: Install Rust, Clippy and Rustfmt
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: rustfmt, clippy
+      - name: Format
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+      - name: Clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+      - name: Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+      - name: Build Release
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
       - name: Upload Binary
         uses: actions/upload-artifact@v1
         with:
@@ -53,7 +49,7 @@ jobs:
   release:
     needs: build
     runs-on: macos-latest
-#    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')
 
     steps:
       - uses: actions/checkout@v1
