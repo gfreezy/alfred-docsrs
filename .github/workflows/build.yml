@@ -8,7 +8,7 @@ on:
     branches:
       - master
   release:
-    types: [published, created, edited]
+    types: [published]
 
 jobs:
   build:
@@ -26,6 +26,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: fmt
+          args: --all -- --check
       - name: Clippy
         uses: actions-rs/cargo@v1
         with:
@@ -52,6 +53,7 @@ jobs:
     if: github.event_name == 'release'
 
     steps:
+      - uses: actions/checkout@v1
       - uses: actions/download-artifact@v1
         with:
           name: docsrs
