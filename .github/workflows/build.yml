@@ -42,6 +42,7 @@ jobs:
 #          args: --release
       - name: Junk
         run: |
+          mkdir target/release
           touch target/release/docsrs
       - name: Upload Binary
         uses: actions/upload-artifact@v1
