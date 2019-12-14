@@ -42,7 +42,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Search Docs.rs</string>
+	<string>SearchDocs.rs</string>
 	<key>objects</key>
 	<array>
 		<dict>
