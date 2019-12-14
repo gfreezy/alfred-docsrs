@@ -176,9 +176,6 @@
 		</dict>
 		<key>9B500F53-4041-4904-8162-015DEDE7DD46</key>
 		<dict>
-			<key>note</key>
-			<string>-- JSON Version --
-This Script Filter sets a variable which is available to subsequent runs in the session. In this case, the variable is used to count the number of runs.</string>
 			<key>xpos</key>
 			<integer>70</integer>
 			<key>ypos</key>
